@@ -1,7 +1,7 @@
-
 body {
   background-image: url('/images/stardust.png');
   color: #FFFFFF;
+  font-family: calibri;
 }
 
 a,
@@ -10,10 +10,37 @@ a:visited {
   text-decoration: none;
 }
 
+a:hover {font-size: 1.05em;
+         text-decoration: underline;}
+
 .container {
   max-width: 1024px;
   margin: 0 auto;
 }
+
+.content {text-align: center;
+          width: 60%;}
+
+.content h1 {margin-left: 1em;}
+
+.content ul {border: 1px dotted white;}
+
+.content li {padding: .75em;}
+
+.create form {top: 7em;
+               position: absolute;}
+
+.members li,
+.container li {list-style-type: none;}
+ 
+.members img {border-radius: 50%;
+              height: 3.5em;
+              width: auto;}
+
+.comment li {display: inline-block;
+             padding: 1em;}
+
+.container a {padding: 0 1em 0 1em;}
 
 .top-bar {
   background-color: #3C3C3C;

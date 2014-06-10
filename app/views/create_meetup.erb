@@ -1,21 +1,21 @@
-<form action="/create" method="post">
-	
-	<label for="name"> Event Name </label>
-	<input id="name" name="name" type="text">
+<form class="create" action="/create" method="post">
+  <ul class="small_forms">
+	<li><label for="name"> Event Name </label>
+	<input id="name" name="name" type="text"></li>
 	<br> <br>
 	
-	<label for="location"> Location </label>
-	<input id="location" name="location" type="text">
+	<li><label for="location"> Location </label>
+	<input id="location" name="location" type="text"></li>
 	<br> <br>
 	
-	<label for="date"> Date </label>
-	<input id="date" name="date" type="datetime-local">
+	<li><label for="date"> Date </label>
+	<input id="date" name="date" type="datetime-local"></li>
 	<br> <br>
-
-	<label for="description"> Enter A Description </label>
-	<input id="description" name="description" type="textarea">
+  
+	<li><label for="description"> Description </label>
+	<input id="description" name="description" type="textarea"></li>
 	<br> <br>
-
+  </ul>
 	<input type="submit" value="Create Your Event">
 	
 </form>

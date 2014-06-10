@@ -20,6 +20,7 @@
 <p><%= @description %></p>
 
 <div class="members">
+  <h2> Attending </h2>
   <% if @users.any? {|user| user.id == session[:user_id]} %>
     <ul>
       <% @users.each do |user| %>
@@ -30,8 +31,10 @@
 
     <ul>
       <% @comments.each do |comment| %>
-	    <li><p class="comment"> <%= comment.body %> </p></li>
-	    <li><%= comment.user.username %></li>
+	    <div class="comment"> 
+        <li><p> <%= comment.body %> </p></li>
+	      <li><%= comment.user.username %></li>
+      </div>
       <% end %>
     </ul>
     
