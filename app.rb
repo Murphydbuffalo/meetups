@@ -6,6 +6,7 @@ require 'omniauth-github'
 require_relative 'config/application'
 
 Dir['app/**/*.rb'].each { |file| require_relative file }
+# ** -> recursive?  requires all models and views
 
 helpers do
   def current_user
@@ -25,6 +26,7 @@ end
 def authenticate!
   unless signed_in?
     flash[:notice] = 'You need to sign in if you want to do that!'
+    #flash gets passed to templates, similar to session...global
     redirect '/'
   end
 end
@@ -50,6 +52,14 @@ get '/sign_out' do
   redirect '/'
 end
 
-get '/example_protected_page' do
+post '/' do
+  authenticate!
+end
+
+post '/:meetup_id' do
+  authenticate!
+end
+
+post '/:meetup_id/comments' do
   authenticate!
 end
