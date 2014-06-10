@@ -32,6 +32,8 @@ def authenticate!
 end
 
 get '/' do
+  @meetups = Meetup.all
+
   erb :index
 end
 
@@ -52,14 +54,38 @@ get '/sign_out' do
   redirect '/'
 end
 
+get '/meetups/:meetup_id' do
+  meetup = Meetup.where(id: params[:meetup_id]).first
+  @name = meetup.name
+  @location = meetup.location
+  @description = meetup.description
+  @date = meetup.date
+
+  erb :show
+end
+
 post '/' do
   authenticate!
 end
 
-post '/:meetup_id' do
+get '/create' do
+  erb :create_meetup
+end
+
+post '/create' do
+  meetup = Meetup.create(
+    name: params[:name],
+    location: params[:location],
+    date: params[:date],
+    description: params[:description]
+    )
+  redirect "/meetups/#{meetup.id}"
+end
+
+post '/meetups/:meetup_id' do
   authenticate!
 end
 
-post '/:meetup_id/comments' do
+post '/meetups/:meetup_id/comments' do
   authenticate!
 end
