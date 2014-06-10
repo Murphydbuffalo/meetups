@@ -104,6 +104,16 @@ post '/meetups/:meetup_id/join' do
   redirect "/meetups/#{params[:meetup_id]}"
 end
 
+post '/meetups/:meetup_id/leave' do
+  authenticate!
+  Participation.where(
+    user_id: session[:user_id],
+    meetup_id: params[:meetup_id]
+    ).first.destroy
+
+  redirect '/'
+end
+
 post '/meetups/:meetup_id/comments' do
   authenticate!
   Comment.create(

@@ -5,11 +5,17 @@
   <h3><%= "When?" %> <span><%= "#{@date}" %></span> </h3>
 <% end %>
 
-<form action="/meetups/<%= @id %>/join" method="post">
-  <% if @users.none? {|user| user.id == session[:user_id]} %>
+
+<% if @users.none? {|user| user.id == session[:user_id]} %>
+  <form action="/meetups/<%= @id %>/join" method="post">
     <input type="submit" value="Join <%= @name %>">
-  <% end %>
-</form>
+  </form>
+<% else %>
+  <form action="/meetups/<%= @id %>/leave" method="post">
+    <input type="submit" value="Leave Event <%= @name %>">
+  </form>
+<% end %>
+
 
 <p><%= @description %></p>
 
