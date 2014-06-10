@@ -62,6 +62,7 @@ get '/meetups/:meetup_id' do
   @description = meetup.description
   @date = meetup.date
   @users = meetup.users
+  @comments = meetup.comments
 
   erb :show
 end
@@ -94,7 +95,7 @@ end
 
 post '/meetups/:meetup_id/join' do
   authenticate!
-  
+
   participant = Participation.create(
     user_id: session[:user_id], 
     meetup_id: params[:meetup_id]
@@ -105,4 +106,10 @@ end
 
 post '/meetups/:meetup_id/comments' do
   authenticate!
+  Comment.create(
+    user_id: session[:user_id], 
+    meetup_id: params[:meetup_id],
+    body: params[:body]
+    )
+  redirect "/meetups/#{params[:meetup_id]}"
 end
