@@ -1,5 +1,26 @@
 <h1><%= @name %></h1>
 
-<h3><%= "#{@location} #{@date}" %></h3>
+<h3><%= "Where? #{@location}" %></h3>
+<% if @date != nil %>  
+  <h3><%= "When?" %> <span><%= "#{@date}" %></span> </h3>
+<% end %>
+
+<form action="/meetups/<%= @id %>/join" method="post">
+  <% if @users.none? {|user| user.id == session[:user_id]} %>
+    <input type="submit" value="Join <%= @name %>">
+  <% end %>
+</form>
 
 <p><%= @description %></p>
+
+<div class="members">
+  <% if @users.any? {|user| user.id == session[:user_id]} %>
+    <ul>
+    <% @users.each do |user| %>
+	  <li><%= user.username %></li>
+	  <li> <img src="<%= user.avatar_url %>"/> </li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
+

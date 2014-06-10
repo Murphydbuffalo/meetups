@@ -56,10 +56,12 @@ end
 
 get '/meetups/:meetup_id' do
   meetup = Meetup.where(id: params[:meetup_id]).first
+  @id = meetup.id
   @name = meetup.name
   @location = meetup.location
   @description = meetup.description
   @date = meetup.date
+  @users = meetup.users
 
   erb :show
 end
@@ -69,6 +71,7 @@ post '/' do
 end
 
 get '/create' do
+  authenticate!
   erb :create_meetup
 end
 
@@ -79,11 +82,25 @@ post '/create' do
     date: params[:date],
     description: params[:description]
     )
+
+  participant = Participation.create(
+    user_id: session[:user_id], 
+    meetup_id: params[:meetup_id],
+    organizer?: true
+    )
+
   redirect "/meetups/#{meetup.id}"
 end
 
-post '/meetups/:meetup_id' do
+post '/meetups/:meetup_id/join' do
   authenticate!
+  
+  participant = Participation.create(
+    user_id: session[:user_id], 
+    meetup_id: params[:meetup_id]
+    )
+
+  redirect "/meetups/#{params[:meetup_id]}"
 end
 
 post '/meetups/:meetup_id/comments' do
