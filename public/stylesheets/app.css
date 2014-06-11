@@ -37,23 +37,23 @@ a:hover {font-size: 1.05em;
               height: 3.5em;
               width: auto;}
 
+.comment {min-height: 3em;}
+
 .comment li {display: inline-block;
              padding: 1em;}
-
-.container a {padding: 0 1em 0 1em;}
 
 .top-bar {
   background-color: #3C3C3C;
 }
 
-.top-bar-section {
-  display: inline-block;
-  float: right;
-}
+.top-bar-section {position: absolute;
+                  top: 1em;
+                  right: 2em;}
 
+.top-bar li,
 .top-bar-section li {
   display: inline-block;
-  margin-left: 1em;
+  padding: 0 1em;
 }
 
 .logo {

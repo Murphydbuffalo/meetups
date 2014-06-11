@@ -55,14 +55,7 @@ get '/sign_out' do
 end
 
 get '/meetups/:meetup_id' do
-  meetup = Meetup.where(id: params[:meetup_id]).first
-  @id = meetup.id
-  @name = meetup.name
-  @location = meetup.location
-  @description = meetup.description
-  @date = meetup.date
-  @users = meetup.users
-  @comments = meetup.comments
+  @meetup = Meetup.where(id: params[:meetup_id]).first
 
   erb :show
 end

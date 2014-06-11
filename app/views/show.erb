@@ -1,36 +1,38 @@
-<h1><%= @name %></h1>
+<h1><%= @meetup.name %></h1>
 
-<h3><%= "Where? #{@location}" %></h3>
-<% if @date != nil %>  
-  <h3><%= "When?" %> <span><%= "#{@date}" %></span> </h3>
+<h3><%= "Where? #{@meetup.location}" %></h3>
+<% if @meetup.date != nil %>  
+  <h3><%= "When?" %> <span><%= "#{@meetup.date}" %></span> </h3>
 <% end %>
 
 
-<% if @users.none? {|user| user.id == session[:user_id]} %>
-  <form action="/meetups/<%= @id %>/join" method="post">
-    <input type="submit" value="Join <%= @name %>">
+<% if @meetup.users.none? {|user| user.id == session[:user_id]} %>
+  <form action="/meetups/<%= @meetup.id %>/join" method="post">
+    <input type="submit" value="Join <%= @meetup.name %>">
   </form>
 <% else %>
-  <form action="/meetups/<%= @id %>/leave" method="post">
-    <input type="submit" value="Leave Event <%= @name %>">
+  <form action="/meetups/<%= @meetup.id %>/leave" method="post">
+    <input type="submit" value="Leave <%= @meetup.name %>">
   </form>
 <% end %>
 
 
-<p><%= @description %></p>
+<p><%= @meetup.description %></p>
 
 <div class="members">
-  <h2> Attending </h2>
-  <% if @users.any? {|user| user.id == session[:user_id]} %>
+  
+  <% if @meetup.users.any? {|user| user.id == session[:user_id]} %>
+    <h2> Attending </h2>
     <ul>
-      <% @users.each do |user| %>
+      <% @meetup.users.each do |user| %>
 	    <li><%= user.username %></li>
 	    <li> <img src="<%= user.avatar_url %>"/> </li>
       <% end %>
     </ul>
 
+    <h3> Leave a Comment </h3>
     <ul>
-      <% @comments.each do |comment| %>
+      <% @meetup.comments.each do |comment| %>
 	    <div class="comment"> 
         <li><p> <%= comment.body %> </p></li>
 	      <li><%= comment.user.username %></li>
@@ -38,7 +40,7 @@
       <% end %>
     </ul>
     
-    <form action="/meetups/<%= @id %>/comments" method="post">
+    <form action="/meetups/<%= @meetup.id %>/comments" method="post">
 
       <label for="body"> Enter A Comment </label>
 
